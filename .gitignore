@@ -1,0 +1,7 @@
+#ignoriert folgende Endungen
+
+*.xl*
+*.doc*
+*.pdf
+*.png
+*.txt
