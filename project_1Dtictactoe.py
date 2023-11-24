@@ -1,30 +1,62 @@
+from random import randrange
+
 board = "--------------------"
 player_mark = "x"
 computer_mark = "o"
 current_mark = None
 pos_number = None
+rand_number = None
 
 # STEP 1
 
-def fun_evaluate(b):
+def fun_evaluate(board):
     '''Evaluates the status of the game.'''
-    if "xxx" in b:
+
+    if "xxx" in board:
         return "x" # Player won
-    elif "ooo" in b:
+    elif "ooo" in board:
         return "o" # Computer won
-    elif "-" in b:
+    elif "-" in board:
         return "-" # Rest, game not finished
     else:
         return "!" # Draw
 
+# STEP 2
 
+def fun_move(board, pos_number, current_mark):
+    '''Accepts string of the game board, a position number (0-19), and a mark (x or o). /n
+    Then returns the updated game board.'''
 
-# STEP 2 # !!! TRACEBACK weil str item assignment ist nicht möglich, muss in Liste verwandeln !!!
-
-def fun_move(b, c, d):
-    '''Accepts the strings of the game board, a position number (0-19), and a mark (x or o). Then returns the updated game board.'''
-    b[c] = str(d)
+    list_board = list(board)
+    list_board[pos_number] = str(current_mark)
+    board = ''.join(list_board)
     return board
+
+# STEP 3
+
+def fun_player_move(current_mark, pos_number, board):
+    '''Accepts string of the game board, asks player which position /n 
+    to play, returns updated board.'''
+
+    current_mark = player_mark
+    pos_number = int(input("Which position you would like to play? "))
+    return fun_move(board, pos_number, current_mark)
+
+# STEP 4
+
+def fun_pc_move(current_mark, pos_number, board, rand_number):
+    '''Accepts string of the game board, will select position to play, returns the updated board.'''
+
+    current_mark = computer_mark
+    rand_number = randrange(0,19)
+    while True:
+        if board[rand_number] == "-":
+            pos_number = rand_number
+            break
+        else:
+            rand_number = randrange(0,19)
+        
+    return fun_move(board, pos_number, current_mark)
 
 # PLAY
 
@@ -32,11 +64,12 @@ print(board) # prints board
 print(len(board)) # prints board length for checking
 print("Status: ", fun_evaluate(board)) # prints game status
 
-current_mark = "x" # ACHTUNG hard copy
-pos_number = int("4") # ACHTUNG hard copy
-board = fun_move(board, pos_number, current_mark)
-
-print(board) # prints board
+board = fun_player_move(current_mark, pos_number, board)
+print(board)
 print(len(board)) # prints board length for checking
 print("Status: ", fun_evaluate(board)) # prints game status
 
+board = fun_pc_move(current_mark, pos_number, board, rand_number)
+print(board)
+print(len(board)) # prints board length for checking
+print("Status: ", fun_evaluate(board)) # prints game status
