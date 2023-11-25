@@ -6,6 +6,7 @@ computer_mark = "o"
 current_mark = None
 pos_number = None
 rand_number = None
+input_number = None
 result = None
 
 # STEP 1
@@ -25,7 +26,7 @@ def fun_evaluate(board):
 # STEP 2
 
 def fun_move(board, pos_number, current_mark):
-    '''Accepts string of the game board, a position number (0-19), and a mark (x or o). /n
+    '''Accepts string of the game board, a position number (0-19), and a mark (x or o). \n
     Then returns the updated game board.'''
 
     list_board = list(board)
@@ -35,13 +36,21 @@ def fun_move(board, pos_number, current_mark):
 
 # STEP 3
 
-def fun_player_move(current_mark, pos_number, board):
-    '''Accepts string of the game board, asks player which position /n 
+def fun_player_move(current_mark, pos_number, board, input_number):
+    '''Accepts string of the game board, asks player which position \n 
     to play, returns updated board.'''
 
     current_mark = player_mark
     print(board)
-    pos_number = int(input("Which position you would like to play? "))
+    input_number = int(input("Which position you would like to play? "))
+    
+    if board[input_number] == "-":
+        pos_number = input_number
+    else:
+        input_number = None
+        print("This position is not free, please choose another one.")
+        return fun_player_move(current_mark, pos_number, board, input_number)
+    
     return fun_move(board, pos_number, current_mark)
 
 # STEP 4
@@ -67,7 +76,7 @@ def fun_1D_tictactoe(current_mark, pos_number, board, rand_number, result):
     while True:
         result = fun_evaluate(board)
         if result == "-":
-            board = fun_player_move(current_mark, pos_number, board)
+            board = fun_player_move(current_mark, pos_number, board, input_number)
             board = fun_pc_move(current_mark, pos_number, board, rand_number)
             fun_1D_tictactoe(current_mark, pos_number, board, rand_number, result)
         else:
