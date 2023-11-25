@@ -40,6 +40,7 @@ def fun_player_move(current_mark, pos_number, board):
     to play, returns updated board.'''
 
     current_mark = player_mark
+    print(board)
     pos_number = int(input("Which position you would like to play? "))
     return fun_move(board, pos_number, current_mark)
 
@@ -56,7 +57,6 @@ def fun_pc_move(current_mark, pos_number, board, rand_number):
             break
         else:
             rand_number = randrange(0,19)
-        
     return fun_move(board, pos_number, current_mark)
 
 # STEP 5
@@ -64,15 +64,15 @@ def fun_pc_move(current_mark, pos_number, board, rand_number):
 def fun_1D_tictactoe(current_mark, pos_number, board, rand_number, result):
     '''Creates string, alternatively calls player_move and pc_move functions until the end of the game.'''
     
-    result = fun_evaluate(board)
     while True:
+        result = fun_evaluate(board)
         if result == "-":
-            fun_player_move(current_mark, pos_number, board)
-            fun_pc_move(current_mark, pos_number, board, rand_number)
+            board = fun_player_move(current_mark, pos_number, board)
+            board = fun_pc_move(current_mark, pos_number, board, rand_number)
             fun_1D_tictactoe(current_mark, pos_number, board, rand_number, result)
-            continue
         else:
-            print("The game ends.")
+            print("The game ends. \nThis is the final board:", board, "\n")
+        break
 
 # PLAY
 
@@ -91,5 +91,3 @@ def fun_1D_tictactoe(current_mark, pos_number, board, rand_number, result):
 #print("Status: ", fun_evaluate(board)) # prints game status
 
 board = fun_1D_tictactoe(current_mark, pos_number, board, rand_number, result)
-print(board)
-print("Status: ", fun_evaluate(board)) # prints game status
