@@ -1,17 +1,8 @@
 from random import randrange
 
-board = "--------------------"
-player_mark = "x"
-computer_mark = "o"
-current_mark = None
-pos_number = None
-rand_number = None
-input_number = None
-result = None
+# DEFINING FUNCTIONS
 
-# STEP 1
-
-def fun_evaluate(board):
+def fun_evaluate_game_status(board):
     '''Evaluates the status of the game.'''
 
     if "xxx" in board:
@@ -23,9 +14,7 @@ def fun_evaluate(board):
     else:
         return "!" # Draw
 
-# STEP 2
-
-def fun_move(board, pos_number, current_mark):
+def fun_move_marker(board, pos_number, current_mark):
     '''Accepts string of the game board, a position number (0-19), and a mark (x or o).
     Then returns the updated game board.'''
 
@@ -34,12 +23,12 @@ def fun_move(board, pos_number, current_mark):
     board = ''.join(list_board)
     return board
 
-# STEP 3
 
-def fun_player_move(board, current_mark, pos_number, input_number):
+def fun_player_move(board):
     '''Accepts string of the game board, asks player which position 
     to play, returns updated board.'''
 
+    player_mark = "x"
     current_mark = player_mark
     print("\n", board)
     input_number = int(input("Which position you would like to play? "))
@@ -49,16 +38,15 @@ def fun_player_move(board, current_mark, pos_number, input_number):
     else:
         input_number = None
         print("This position is not free, please choose another one.")
-        return fun_player_move(board, current_mark, pos_number, input_number)
+        return fun_player_move(board)
     
-    return fun_move(board, pos_number, current_mark)
+    return fun_move_marker(board, pos_number, current_mark)
 
-# STEP 4
-
-def fun_pc_move(board, current_mark, pos_number, rand_number):
+def fun_computer_move(board):
     '''Accepts string of the game board, will select position to play, 
     returns the updated board.'''
 
+    computer_mark = "o"
     current_mark = computer_mark
     rand_number = randrange(0, 19)
     while True:
@@ -68,21 +56,20 @@ def fun_pc_move(board, current_mark, pos_number, rand_number):
         else:
             rand_number = randrange(0,19)
     
-    return fun_move(board, pos_number, current_mark)
+    return fun_move_marker(board, pos_number, current_mark)
 
-# STEP 5
+def fun_1D_tictactoe(board):
+    '''Creates string, alternatively calls player_move and computer_move 
+    functions until the end of the game.'''
 
-def fun_1D_tictactoe(board, current_mark, pos_number, rand_number, result):
-    '''Creates string, alternatively calls player_move and pc_move functions until the end of the game.'''
-    
-    result = fun_evaluate(board)
+    result = fun_evaluate_game_status(board)
     while True:
         if result == "-":
-            board = fun_player_move(board, current_mark, pos_number, input_number)
-            result = fun_evaluate(board)
+            board = fun_player_move(board)
+            result = fun_evaluate_game_status(board)
             if result == "-":
-                board = fun_pc_move(board, current_mark, pos_number, rand_number)
-                result = fun_evaluate(board)
+                board = fun_computer_move(board)
+                result = fun_evaluate_game_status(board)
             else: 
                 print("\nCongratulations, you won. \nThis is the final board:", board, "\n")
                 break
@@ -90,6 +77,7 @@ def fun_1D_tictactoe(board, current_mark, pos_number, rand_number, result):
             print("\nComputer won. \nThis is the final board:", board, "\n")
             break
 
-# PLAY
+# PLAY GAME
 
-board = fun_1D_tictactoe(board, current_mark, pos_number, rand_number, result)
+board = "--------------------"
+fun_1D_tictactoe(board)
