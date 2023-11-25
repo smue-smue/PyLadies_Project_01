@@ -23,7 +23,6 @@ def fun_move_marker(board, pos_number, current_mark):
     board = ''.join(list_board)
     return board
 
-
 def fun_player_move(board):
     '''Accepts string of the game board, asks player which position 
     to play, returns updated board.'''
@@ -31,13 +30,25 @@ def fun_player_move(board):
     player_mark = "x"
     current_mark = player_mark
     print("\n", board)
-    input_number = int(input("Which position you would like to play? "))
+    input_number = input("Which position from 1 to 20 you would like to play? ") # Options 1-20 easier to understand
+
+    try:
+        int_input_number = int(input_number) - 1 # correcting index position
     
-    if board[input_number] == "-":
-        pos_number = input_number
+    except:
+        int_input_number = "no integer"
+        print("Please enter a number between 1 and 20, not a word.") 
+        return fun_player_move(board)
+
+    if int_input_number >= 0 and int_input_number <= 19:
+        if board[int_input_number] == "-":
+            pos_number = int_input_number
+        else:
+            int_input_number = None
+            print("This position is not free, please choose another one.")
+            return fun_player_move(board)
     else:
-        input_number = None
-        print("This position is not free, please choose another one.")
+        print("Please enter a number between 1 and 20.")
         return fun_player_move(board)
     
     return fun_move_marker(board, pos_number, current_mark)
