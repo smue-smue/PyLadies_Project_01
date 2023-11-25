@@ -30,7 +30,7 @@ def fun_player_move(board):
     player_mark = "x"
     current_mark = player_mark
     print("\n", board)
-    input_number = input("Which position from 1 to 20 you would like to play? ") # Options 1-20 easier to understand
+    input_number = input("Which position from 1 to 20 you would like to play? ") # Options 1-20, easier to understand
 
     try:
         int_input_number = int(input_number) - 1 # correcting index position
@@ -75,7 +75,10 @@ def fun_1D_tictactoe(board):
 
     result = fun_evaluate_game_status(board)
     while True:
-        if result == "-":
+        if result == "!":
+            print("\nIt's a draw. \nThis is the final board:", board, "\n")
+            break
+        elif result == "-":
             board = fun_player_move(board)
             result = fun_evaluate_game_status(board)
             if result == "-":
