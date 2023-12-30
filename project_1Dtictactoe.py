@@ -59,13 +59,13 @@ def fun_computer_move(board):
 
     computer_mark = "o"
     current_mark = computer_mark
-    rand_number = randrange(0, 19)
+    rand_number = randrange(0, 20)
     while True:
         if board[rand_number] == "-":
             pos_number = rand_number
             break
         else:
-            rand_number = randrange(0,19)
+            rand_number = randrange(0, 20)
     
     return fun_move_marker(board, pos_number, current_mark)
 
