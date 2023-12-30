@@ -94,4 +94,6 @@ def fun_1D_tictactoe(board):
 # PLAY GAME
 
 board = "--------------------"
-fun_1D_tictactoe(board)
+
+if __name__ == "__main__":
+    fun_1D_tictactoe(board)
