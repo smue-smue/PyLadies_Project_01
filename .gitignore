@@ -1,8 +1,7 @@
-#ignoriert folgende Endungen
-
 *.xl*
 *.doc*
 *.pdf
 *.png
 *.txt
 venv/
+**/__pycache__/
