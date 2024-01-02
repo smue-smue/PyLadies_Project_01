@@ -97,3 +97,44 @@ board = "--------------------"
 
 if __name__ == "__main__":
     fun_1D_tictactoe(board)
+
+################################# HOMEWORK #################################
+    
+# 1. What is a Python module and how does it differ from a Python package?
+    # A module is a file containing pre-written code like Python definitions, functions, variables. 
+    # Basically every file saved with the ending .py serves as a module, but it only is useful as such if it 
+    # contains the right definitions or statements needed by other scripts. 
+    # You can use your pre-written custom modules or modules from the pre-installed standard library 
+    # through the import statement. Your custom modules have to be stored in the same directory as the scripts 
+    # that want to make use of the module, those of the standard library can be accessed automatically.
+    # A package is a collection of related modules under a common namespace, that you use to make your code more organized. 
+    # Packages can be part of a Library.A library can contain multiple packages and modules.
+
+# 2. What are side effects and give some examples.
+    # A side effect happens every time your script interacts with the outside, such as reading user input, 
+    # printing something to the screen, writing to a file or modifying given arguments. 
+    # Unlike in everyday language, side effects can be intentional and often are an essential part of the script. 
+    # It is important though to ensure that the script is behaving as intended and that there are built-in exceptions 
+    # to know how to handle wrong user input. Scripts with side effects are harder to test than so-called 
+    # “pure functions” which only return a result and have no interaction with the outside.
+
+# 3. What are Exceptions and what to do if third-party code that we use throws them?
+    # In everyday language we use the term exception for something that does not follow the usual rules, 
+    # in programming it is used as a term for the mechanism of handling those (expected) unexpected situations or errors 
+    # through causing a disruption (the Exception). There is a difference in “Errors” and “Exceptions”. 
+    # Errors are a broad term for any issues that cause unintentional behavior but not all Exceptions are Errors per se, 
+    # but rather a condition that disrupts the script and can be handled.  If an Exception is raised in the script but it 
+    # is not handled (like through an try except block), the script will be terminated and a traceback will be printed to 
+    # the console with information about the specific Exception that should be handled for the script to run like intended.
+    # If third-party code throws Exceptions, we should try to catch and handle them.
+    
+# 4. Using which keywords can you create, throw and catch your new custom Exception?
+    # The keyword "class" is used to create a custom Exception as subclass from the built-in Exception class.
+    # The keyword "raise" is used for throwing, meaning triggering, the Exception.
+    # The keywords "try" and "except" are used to catch the Exception.
+
+# 5. Give examples of some benefits of testing?
+    # Finding unexpected behaviors in code that needs handling with Exceptions.
+    # Finding Errors that can't be handled with Exceptions and need to be fixed.
+
+################################# HOMEWORK #################################
